@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+<meta charset="UTF-8">
+<title>Set Redirect Link</title>
+</head>
+<body>
+
+<h2>Set login redirect link (kun lokal browser)</h2>
+
+<input id="linkInput" placeholder="https://example.com" style="width:300px" />
+<button id="saveBtn">Save link</button>
+
+<p id="status"></p>
+
+<script>
+const input = document.getElementById("linkInput");
+const status = document.getElementById("status");
+
+// Hvis der allerede er et link gemt
+if (localStorage.getItem("redirectLink")) {
+  input.value = localStorage.getItem("redirectLink");
+}
+
+document.getElementById("saveBtn").addEventListener("click", () => {
+  const link = input.value.trim();
+
+  if (!link.startsWith("http")) {
+    status.textContent = "❌ Ugyldigt link";
+    return;
+  }
+
+  localStorage.setItem("redirectLink", link);
+  status.textContent = "✅ Link gemt lokalt i browser";
+});
+</script>
+
+</body>
+</html>
